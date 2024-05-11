@@ -1,63 +1,48 @@
 import fs from 'fs'
+import { TableTile, activityData } from './types and input data'
 
-const data: any[] = [
-  ['A', []],
-  ['B', []],
-  ['C', ['A']],
-  ['D', ['A', 'B']],
-  ['E', ['B']],
-  ['F', ['D', 'E']],
-  ['G', ['C', 'E']],
-  ['H', ['D', 'G']],
-  ['I', ['F']],
-  ['J', ['F', 'H']],
-]
-const table: any[] = []
+const table: TableTile[] = []
 
 let currEndNode = 0
-data.forEach((activity) => {
-  let start: string | number
+activityData.forEach((activity) => {
+  let start: 'start' | number
   currEndNode++
-  if (activity[1].length == 0) {
+  if (activity.predecessors.length == 0) {
     start = 'start'
-  } else if (activity[1].length == 1) {
-    let tile: any
-    for (let i = 0; i < table.length; i++) {
-      if (table[i][0] == activity[1][0]) {
-        tile = table[i]
-      }
-    }
-    start = tile[2]
+  } else if (activity.predecessors.length == 1) {
+    const predecessorTile = table.find(
+      (tile) => tile.name == activity.predecessors[0]
+    )!
+    start = predecessorTile.end as number
   } else {
-    activity[1].forEach((predecessor: any) => {
-      let tile: any
-      for (let i = 0; i < table.length; i++) {
-        if (table[i][0] == predecessor) {
-          tile = table[i]
-        }
+    activity.predecessors.forEach((predecessor: any) => {
+      const predecessorTile = table.find((tile) => tile.name == predecessor)!
+      const dummyTile = {
+        name: `${predecessor}${activity.name}`,
+        start: predecessorTile.end as number,
+        end: currEndNode,
       }
-      table.push([`${predecessor}${activity[0]}`, tile[2], currEndNode])
+      table.push(dummyTile)
     })
     start = currEndNode
     currEndNode++
   }
 
-  table.push([activity[0], start, currEndNode])
+  table.push({ name: activity.name, start, end: currEndNode })
 })
 
-const startNodes = table.map((tile) => tile[1])
-const endNodes = table.map((tile) => tile[2])
+const startNodes = new Set(table.map((tile) => tile.start))
+const endNodes = new Set(table.map((tile) => tile.end))
 
-const setStart = new Set(startNodes)
-const setEnd = new Set(endNodes)
-console.log('startNodes', setStart)
-console.log('endNodes', setEnd)
-
-const finalNodes = [...setEnd].filter((node) => !setStart.has(node))
-console.log('finalNodes', finalNodes)
+const finalNodes = [...endNodes].filter(
+  (node) => !startNodes.has(node as number)
+)
 
 finalNodes.forEach((node) => {
-  table.push([`end${node}`, node, 'end'])
+  table.push({ name: `end${node}`, start: node as number, end: 'end' })
 })
 
-fs.writeFileSync('src/algorithm/file.json', JSON.stringify(table))
+fs.writeFileSync(
+  'D:/coding/algorithm/file.json',
+  JSON.stringify(table, null, 2)
+)

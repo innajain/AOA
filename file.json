@@ -1,0 +1,112 @@
+[
+  {
+    "name": "A",
+    "start": "start",
+    "end": 1
+  },
+  {
+    "name": "B",
+    "start": "start",
+    "end": 2
+  },
+  {
+    "name": "C",
+    "start": 1,
+    "end": 3
+  },
+  {
+    "name": "AD",
+    "start": 1,
+    "end": 4
+  },
+  {
+    "name": "BD",
+    "start": 2,
+    "end": 4
+  },
+  {
+    "name": "D",
+    "start": 4,
+    "end": 5
+  },
+  {
+    "name": "E",
+    "start": 2,
+    "end": 6
+  },
+  {
+    "name": "DF",
+    "start": 5,
+    "end": 7
+  },
+  {
+    "name": "EF",
+    "start": 6,
+    "end": 7
+  },
+  {
+    "name": "F",
+    "start": 7,
+    "end": 8
+  },
+  {
+    "name": "CG",
+    "start": 3,
+    "end": 9
+  },
+  {
+    "name": "EG",
+    "start": 6,
+    "end": 9
+  },
+  {
+    "name": "G",
+    "start": 9,
+    "end": 10
+  },
+  {
+    "name": "DH",
+    "start": 5,
+    "end": 11
+  },
+  {
+    "name": "GH",
+    "start": 10,
+    "end": 11
+  },
+  {
+    "name": "H",
+    "start": 11,
+    "end": 12
+  },
+  {
+    "name": "I",
+    "start": 8,
+    "end": 13
+  },
+  {
+    "name": "FJ",
+    "start": 8,
+    "end": 14
+  },
+  {
+    "name": "HJ",
+    "start": 12,
+    "end": 14
+  },
+  {
+    "name": "J",
+    "start": 14,
+    "end": 15
+  },
+  {
+    "name": "end13",
+    "start": 13,
+    "end": "end"
+  },
+  {
+    "name": "end15",
+    "start": 15,
+    "end": "end"
+  }
+]
