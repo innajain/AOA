@@ -42,7 +42,4 @@ finalNodes.forEach((node) => {
   table.push({ name: `end${node}`, start: node as number, end: 'end' })
 })
 
-fs.writeFileSync(
-  'D:/coding/algorithm/file.json',
-  JSON.stringify(table, null, 2)
-)
+fs.writeFileSync('./file.json', JSON.stringify(table, null, 2))
